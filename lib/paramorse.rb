@@ -55,7 +55,6 @@ module ParaMorse
       if n.empty?
         @queue.last
       else
-        num_digits = n[0]
         length = @queue.length
         @queue[(length-n[0])..length].reverse
       end
