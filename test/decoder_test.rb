@@ -8,8 +8,6 @@ class DecoderTest < Minitest::Test
     assert_equal "badger", d.decode("11101010100010111000111010100011101110100010001011101")
   end
 
-
-
   def test_decode_words
     d = ParaMorse::Decoder.new
     star_wars_encoded = "10101000111000101110001011101" + "0000000" + "10111011100010111000101110100010101"

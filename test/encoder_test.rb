@@ -11,6 +11,7 @@ class EncoderTest < Minitest::Test
     expected_string = badger_encoded + "0000000" + badger_encoded
     star_wars_encoded = "10101000111000101110001011101" + "0000000" + "10111011100010111000101110100010101"
     assert_equal "10001000000010001", e.encode("ee ee")
+    assert_equal "100000001", e.encode("e e")
     assert_equal expected_string, e.encode("badger badger")
     assert_equal star_wars_encoded, e.encode("star wars")
   end

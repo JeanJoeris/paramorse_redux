@@ -4,8 +4,10 @@ require "./lib/encoder"
 require "./lib/decoder"
 require "./lib/queue"
 require "./lib/stream_decoder"
+require "./lib/stream_encoder"
 require "./lib/file_encoder"
 require "./lib/file_decoder"
+require "./lib/para_encoder"
 require 'pry'
 module ParaMorse
   Morse = {
@@ -35,7 +37,7 @@ module ParaMorse
     "x" => "11101010111",
     "y" => "1110101110111",
     "z" => "11101110101",
-    " " => " ",
+    " " => "0000000",
     "1" => "10111011101110111",
     "2" => "101011101110111",
     "3" => "1010101110111",
