@@ -19,6 +19,8 @@ class StreamEncoderTest < Minitest::Test
     assert_equal "1", se.encode
     se.receive("t")
     assert_equal "111", se.encode
+    se.receive(" ")
+    assert_equal "0000000", se.encode
   end
 
   def test_stream_encode_a_word

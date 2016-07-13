@@ -15,4 +15,10 @@ class EncoderTest < Minitest::Test
     assert_equal expected_string, e.encode("badger badger")
     assert_equal star_wars_encoded, e.encode("star wars")
   end
+
+  def test_handles_spaces
+    e = ParaMorse::Encoder.new
+    assert_equal "00000001", e.encode(" e")
+    assert_equal "0000000", e.encode(" ")
+  end
 end
