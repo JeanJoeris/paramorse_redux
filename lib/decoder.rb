@@ -1,12 +1,13 @@
 module ParaMorse
   class Decoder
     def decode(sequence)
+      number_of_ending_spaces = find_ending_spaces(sequence)
       morse_words = sequence.split("0000000")
       decode_words = morse_words.map do |word|
         decode_word(word)
       end
       decoded_sequence = decode_words.join(" ")
-      decoded_sequence += " " if sequence.end_with?("0"*7)
+      decoded_sequence += " " * number_of_ending_spaces
       decoded_sequence
     end
 
@@ -14,6 +15,12 @@ module ParaMorse
       d = LetterDecoder.new
       letters = binary_word.split("000")
       letters.map{ |letter| d.decode(letter)}.join
+    end
+
+    def find_ending_spaces(sequence)
+      start_of_ending_zeroes = sequence =~ /0{0,}\z/
+      number_of_ending_zeroes = sequence.length - start_of_ending_zeroes
+      number_of_ending_spaces = number_of_ending_zeroes / 7
     end
   end
 end

@@ -26,18 +26,16 @@ module ParaMorse
       @streams.each_with_index do |stream, stream_num|
         input_file_name = input_file_path.sub("*", "0"+stream_num.to_s)
         input_file = File.read(input_file_name)
-        input_file.delete("")
+        input_file.each_char do |char|
+          stream.receive(char)
+        end
         @encoded_streams << input_file
       end
     end
 
     def decode_streams
-      @encoded_streams.each do |stream|
-        decoded_string = @decoder.decode(stream)
-        @decoded_streams << decoded_string
-      end
-      @decoded_streams.map! do |stream|
-        stream.chars
+      @streams.each do |stream|
+        @decoded_streams << stream.decode.chars
       end
     end
 
@@ -57,6 +55,7 @@ module ParaMorse
     end
 
     def write_result(output_file_path, result)
+      result.chop! if result.end_with?(" ")
       output_file = File.open(output_file_path, "w")
       output_file.write(result)
       output_file.close

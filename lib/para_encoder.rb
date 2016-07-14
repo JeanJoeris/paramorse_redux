@@ -5,9 +5,11 @@ module ParaMorse
       @streams = []
     end
 
-    def encode_to_file(input_file_path, stream_num, output_file_path)
+    def encode_from_file(input_file_path, stream_num, output_file_path)
       spawn_stream(stream_num)
       input_file = File.read(input_file_path).chomp
+      input_file.delete('!@#$%^&*()\/<>?')
+      input_file.gsub!("\n", " ")
       distribute_to_streams(input_file.chars)
       encode_and_write_streams(output_file_path)
     end
@@ -24,7 +26,7 @@ module ParaMorse
 
     def distribute_to_streams(input_chars)
       while input_chars.count >0 do
-        @streams.each_with_index do |stream, stream_num|
+        @streams.each do |stream|
           char = input_chars.shift
           stream.receive(char) if char != nil
         end

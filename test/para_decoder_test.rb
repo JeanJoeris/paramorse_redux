@@ -34,4 +34,14 @@ class ParaDecoderTest < Minitest::Test
     decoded_file = File.read('./test/data/many_para_decoded.txt')
     assert_equal sample_text, decoded_file
   end
+
+  def test_decode_large_parallel_files
+    # skip
+    pd = ParaMorse::ParaDecoder.new
+    expected_text = File.read('./test/data/obama_speech.txt').downcase
+    expected_text.gsub!("\n", "")
+    pd.decode_from_file('./test/data/obama_encoded_output*.txt', 8, './test/data/obama_decoded_output.txt')
+    output_text = File.read('./test/data/obama_decoded_output.txt')
+    assert_equal expected_text, output_text
+  end
 end
