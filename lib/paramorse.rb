@@ -8,6 +8,7 @@ require "./lib/stream_encoder"
 require "./lib/file_encoder"
 require "./lib/file_decoder"
 require "./lib/para_encoder"
+require "./lib/para_decoder"
 require 'pry'
 module ParaMorse
   Morse = {

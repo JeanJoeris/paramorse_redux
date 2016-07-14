@@ -3,7 +3,6 @@ module ParaMorse
 
     def initialize
       @streams = []
-      @file_encoder = FileEncoder.new
     end
 
     def encode_to_file(input_file_path, stream_num, output_file_path)
@@ -14,24 +13,20 @@ module ParaMorse
     end
 
     def encode_and_write_streams(output_file_path)
-      bit_count = 0 # <~~ this is for testing verification
       @streams.each_with_index do |stream, stream_num|
         output_file_name = output_file_path.sub("*","0"+stream_num.to_s)
         output_file = File.open(output_file_name, "w")
         encoded_string = stream.encode
         output_file.write(encoded_string)
-        bit_count += encoded_string.length
+        output_file.close
       end
-      bit_count
     end
 
     def distribute_to_streams(input_chars)
       while input_chars.count >0 do
         @streams.each_with_index do |stream, stream_num|
           char = input_chars.shift
-          # p "char is #{char}, stream num is #{stream_num}"
-          # puts input_chars.join
-          stream.receive(char)
+          stream.receive(char) if char != nil
         end
       end
     end

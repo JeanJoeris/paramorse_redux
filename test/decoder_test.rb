@@ -14,5 +14,6 @@ class DecoderTest < Minitest::Test
     assert_equal "ee ee", d.decode("10001000000010001")
     assert_equal "badger badger", d.decode("11101010100010111000111010100011101110100010001011101000000011101010100010111000111010100011101110100010001011101")
     assert_equal "star wars", d.decode(star_wars_encoded)
+    assert_equal "tkfet ", d.decode('11100011101011100010101110100010001110000000')
   end
 end

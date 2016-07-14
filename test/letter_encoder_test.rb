@@ -6,4 +6,11 @@ class LetterEncodeTest < Minitest::Test
     assert_equal "111", le.encode("t")
     assert_equal "0000000", le.encode(" ")
   end
+
+  def test_returns_empty_string_for_failed_encoding
+    le = ParaMorse::LetterEncoder.new
+    assert_equal "", le.encode("@")
+    assert_equal "", le.encode("foo")
+    assert_equal "", le.encode("111")
+  end
 end

@@ -13,7 +13,9 @@ class ParaEncoderTest < Minitest::Test
     e = ParaMorse::Encoder.new
     sample_text = "the quick brown fox jumped over the lazy dog"
     encoded_sample = e.encode(sample_text)
-    assert_equal encoded_sample.length, pe.encode_to_file("./test/para_input.txt", 1, "./test/simple_para_output*.txt")
+    pe.encode_to_file("./test/data/para_input.txt", 1, "./test/data/simple_para_output*.txt")
+    encoded_file = File.read("./test/data/simple_para_output00.txt")
+    assert_equal encoded_sample, encoded_file
   end
 
   def test_para_encode_two_streams
@@ -30,27 +32,31 @@ class ParaEncoderTest < Minitest::Test
     encoded_sample_00 = e.encode(every_other_letter)
     encoded_sample_01 = e.encode(every_other_letter_offset)
 
-    pe.encode_to_file("./test/para_input.txt", 2, "./test/para_output*.txt")
-    encoded_file_00 = File.read("./test/para_output00.txt")
-    encoded_file_01 = File.read("./test/para_output01.txt")
+    pe.encode_to_file("./test/data/para_input.txt", 2, "./test/data/para_output*.txt")
+    encoded_file_00 = File.read("./test/data/para_output00.txt")
+    encoded_file_01 = File.read("./test/data/para_output01.txt")
 
     assert_equal encoded_sample_00, encoded_file_00
     assert_equal encoded_sample_01, encoded_file_01
   end
 
   def test_para_encode_many_streams
+
     pe = ParaMorse::ParaEncoder.new
     e = ParaMorse::Encoder.new
     sample_text = "the quick brown fox jumped over the lazy dog"
     expected_letters = Array.new(8, "")
     sample_text.chars.each_with_index do |char, index|
       expected_letters[0] += char if index % 8 == 0
+      expected_letters[1] += char if index % 8 == 1
       expected_letters[7] += char if index % 8 == 7
     end
-    pe.encode_to_file("./test/para_input.txt", 8, "./test/many_para_output*.txt")
-    para_file_00 = File.read('./test/many_para_output00.txt')
-    para_file_07 = File.read('./test/many_para_output07.txt')
+    pe.encode_to_file("./test/data/para_input.txt", 8, "./test/data/many_para_output*.txt")
+    para_file_00 = File.read('./test/data/many_para_output00.txt')
+    para_file_01 = File.read('./test/data/many_para_output01.txt')
+    para_file_07 = File.read('./test/data/many_para_output07.txt')
     assert_equal e.encode(expected_letters[0]), para_file_00
+    assert_equal e.encode(expected_letters[1]), para_file_01
     assert_equal e.encode(expected_letters[7]), para_file_07
   end
 

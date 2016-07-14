@@ -53,9 +53,9 @@ class StreamDecoderTest < Minitest::Test
     s.receive("1")
     s.receive("1")
     s.receive("1")
-    20.times do
+    13.times do
       s.receive("0")
     end
-    assert_equal "t", s.decode
+    assert_equal "t  ", s.decode
   end
 end

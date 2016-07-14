@@ -5,7 +5,9 @@ module ParaMorse
       decode_words = morse_words.map do |word|
         decode_word(word)
       end
-      decode_words.join(" ")
+      decoded_sequence = decode_words.join(" ")
+      decoded_sequence += " " if sequence.end_with?("0"*7)
+      decoded_sequence
     end
 
     def decode_word(binary_word)
