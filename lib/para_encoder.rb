@@ -7,7 +7,7 @@ module ParaMorse
 
     def encode_from_file(input_file_path, stream_num, output_file_path)
       spawn_stream(stream_num)
-      input_file = File.read(input_file_path).chomp
+      input_file = File.read(input_file_path)
       input_file.delete("!@#$%^&*()\/<>?\n")
       distribute_to_streams(input_file.chars)
       encode_and_write_streams(output_file_path)

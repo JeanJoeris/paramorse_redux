@@ -18,10 +18,10 @@ class EncoderTest < Minitest::Test
     assert_equal star_wars_encoded, e.encode("star wars")
   end
 
-  def test_format_for_encoding
+  def test_words_for_encoding
     e = ParaMorse::Encoder.new
     expected_array = ["e", " ", "foo", " ", "and", " ", "bar"]
-    assert_equal expected_array, e.format_for_encoding("e foo and bar")
+    assert_equal expected_array, e.words_for_encoding("e foo and bar")
   end
 
   def test_handles_spaces
@@ -29,7 +29,13 @@ class EncoderTest < Minitest::Test
     assert_equal "00000001", e.encode(" e")
     assert_equal "0000000", e.encode(" ")
     assert_equal "00000000000000", e.encode("  ")
+    assert_equal "000000000000000000000", e.encode("   ")
     assert_equal "10000000", e.encode("e ")
+  end
+
+  def test_handle_punctuation_using_spaces
+    e = ParaMorse::Encoder.new
+    assert_equal "100000001", e.encode("e,e")
   end
 
 end

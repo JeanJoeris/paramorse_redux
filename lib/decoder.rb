@@ -3,10 +3,10 @@ module ParaMorse
     def decode(sequence)
       number_of_ending_spaces = find_ending_spaces(sequence)
       morse_words = sequence.split("0000000")
-      decode_words = morse_words.map do |word|
+      decoded_words = morse_words.map do |word|
         decode_word(word)
       end
-      decoded_sequence = decode_words.join(" ")
+      decoded_sequence = decoded_words.join(" ")
       decoded_sequence += " " * number_of_ending_spaces
       decoded_sequence
     end
@@ -18,6 +18,7 @@ module ParaMorse
     end
 
     def find_ending_spaces(sequence)
+      # uses a regex that finds a string of zeroes at the end
       start_of_ending_zeroes = sequence =~ /0{0,}\z/
       number_of_ending_zeroes = sequence.length - start_of_ending_zeroes
       number_of_ending_spaces = number_of_ending_zeroes / 7

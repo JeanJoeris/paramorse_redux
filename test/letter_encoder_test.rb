@@ -9,7 +9,7 @@ class LetterEncodeTest < Minitest::Test
 
   def test_returns_empty_string_for_failed_encoding
     le = ParaMorse::LetterEncoder.new
-    assert_equal "", le.encode("@")
+    assert_equal "", le.encode("aardwolf")
     assert_equal "", le.encode("foo")
     assert_equal "", le.encode("111")
   end

@@ -3,7 +3,7 @@ module ParaMorse
     def decode(binary_letter)
       letter = Morse.key(binary_letter)
       if letter == nil
-        letter = ""
+        letter = " "
       end
       letter
     end

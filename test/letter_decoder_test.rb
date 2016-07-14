@@ -8,10 +8,10 @@ class LetterDecoderTest < Minitest::Test
     assert_equal " ", ld.decode("0000000")
   end
 
-  def test_returns_empty_string_for_failed_decoding
+  def test_returns_space_for_failed_decoding
     ld = ParaMorse::LetterDecoder.new
-    assert_equal "", ld.decode("@")
-    assert_equal "", ld.decode("ffasjdfjksdla")
-    assert_equal "", ld.decode("1111")
+    assert_equal " ", ld.decode("aardwolf")
+    assert_equal " ", ld.decode("1111")
+    assert_equal " ", ld.decode("1110000111")
   end
 end

@@ -1,12 +1,12 @@
 module ParaMorse
   class Encoder
     def encode(sentence)
-      sentence.chomp!
-      words = format_for_encoding(sentence)
+      cleaned_sentence = sentence.gsub(/[!@$#%^&*,.]/, ' ')
+      words = words_for_encoding(cleaned_sentence)
       encoded_words = words.map do |word|
         encode_word(word)
       end
-      encoded_sequence = encoded_words.join("")
+      encoded_sequence = encoded_words.join
     end
 
     def encode_word(word)
@@ -18,7 +18,8 @@ module ParaMorse
       encoded_letters.join("000")
     end
 
-    def format_for_encoding(sentence)
+
+    def words_for_encoding(sentence)
       # there has to be a better way to do this...
       # I want to take "string with spaces" and
       # get back ["string", " ", "with", " ", "spaces"]
@@ -33,6 +34,7 @@ module ParaMorse
       end
       words_and_spaces
     end
+
 
     # def delete_trailing_zeroes
     #   deleter = TrailingZeroDeleter.new
