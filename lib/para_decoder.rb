@@ -55,7 +55,7 @@ module ParaMorse
     end
 
     def write_result(output_file_path, result)
-      result.chop! if result.end_with?(" ")
+      # result.chop! if result.end_with?(" ")
       output_file = File.open(output_file_path, "w")
       output_file.write(result)
       output_file.close

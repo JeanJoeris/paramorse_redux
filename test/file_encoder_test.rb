@@ -1,5 +1,10 @@
 require './test/test_helper'
 class FileEncoderTest < Minitest::Test
+  def test_file_encoder_exists
+    fe = ParaMorse::FileEncoder.new
+    assert fe
+  end
+
   def test_file_encoder
     fe = ParaMorse::FileEncoder.new
     e = ParaMorse::Encoder.new

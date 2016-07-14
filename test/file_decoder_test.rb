@@ -1,5 +1,10 @@
 require './test/test_helper'
 class FileDecoder < Minitest::Test
+  def test_file_decoder_exits
+    fd = ParaMorse::FileDecoder.new
+    assert fd
+  end
+  
   def test_file_decoder
     # skip
     fd = ParaMorse::FileDecoder.new

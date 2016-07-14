@@ -18,20 +18,20 @@ module ParaMorse
       @decoder.decode(sequence)
     end
 
-    def end_with_non_space_zeros?(sequence)
-      if sequence =~ /10{1,6}\z/
-        true
-      else
-        false
-      end
-    end
-
     def delete_trailing_zeroes(sequence)
       zero_deleted_sequence = sequence
       while end_with_non_space_zeros?(sequence)
         zero_deleted_sequence.chop!
       end
       zero_deleted_sequence
+    end
+
+    def end_with_non_space_zeros?(sequence)
+      if sequence =~ /10{1,6}\z/
+        true
+      else
+        false
+      end
     end
   end
 end
