@@ -15,11 +15,15 @@ class FileDecoder < Minitest::Test
   def test_star_wars_crawl
     fd = ParaMorse::FileDecoder.new
     d = ParaMorse::Decoder.new
+    starting_file = './test/data/star_wars.txt'
     input_file = './test/data/star_wars_encoded.txt'
     output_file = './test/data/star_wars_decoded.txt'
+    starting_text = File.read(starting_file).downcase.chomp
+    starting_text.gsub!(/[!@$#%^&*,.]/, ' ')
     input_code = File.read(input_file)
     fd.decode(input_file, output_file)
     output_code = File.read(output_file)
     assert_equal d.decode(input_code), output_code
+    assert_equal starting_text, output_code
   end
 end

@@ -20,7 +20,6 @@ class FileEncoderTest < Minitest::Test
     input = File.read(input_file)
     fe.encode(input_file, output_file)
     encoded_file = File.read(output_file)
-    assert_equal e.encode(input), encoded_file 
-    # assert_equal e.encode(input),
+    assert_equal e.encode(input), encoded_file
   end
 end
